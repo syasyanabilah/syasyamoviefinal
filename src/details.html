@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="tt">More Movie's Details </title>
+    <link rel="stylesheet" href="index.css" type="text/css">
+</head>
+<body>
+    <div class="viewdiv">
+        <img id="back">
+        <div class="viewdivposter">
+            <div class="another">
+                <div class="anotherwrap">
+                    <div class="viewdivposterbackdrop">
+                        <img id="p" class="viewdivposterposter">
+                        <div class="ratewrapper">
+                            <h4 class="imdbrating">IMDB RATING</h4>
+                            <h3 id="rate"></h3>
+                            <h4 class="imdbrating"id="rtd"></h4>
+                        </div>
+                        <div class="viewdivpostertextwrapper">
+                            <h1 id="mt"></h1>
+                            <div class="rtg">
+                                <h2 id="g"></h2>
+                                <h3 id="rt"></h3>                                
+                            </div>
+                            <h1 id="plot"></h1>
+                            <h1 id="y"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="viewdetailsspes">
+            <div class="viewdetailsspes">
+                <table>
+                    <tr>
+                        <td>
+                            <h4 id="headers" class="center">Actors</h4>
+                            <ul id="actorList" class="list"></ul>
+                        </td>
+                        <td>
+                            <h4 id="headers" class="center">Writer</h4>
+                            <ul id="writerList" class="list"></ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4 id="headers" class="center">Director</h4>
+                            <ul id="directorList" class="list"></ul>
+                        </td>
+                        <td>
+                            <h4 id="headers" class="center">Awards</h4>
+                            <ul id="awardsList" class="list"></ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+    <a href="index.html" id="backview">Back</a>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const imdbid = urlParams.get('i');
+        console.log(imdbid);
+        console.log(1)
+        fetch(`https://www.omdbapi.com/?apikey=30bc27f1&i=${imdbid}&plot=full`)
+        .then((response)=>response.json())
+        .then((data)=>{
+            console.log(10)
+            console.log(data)
+            document.getElementById("back").src = data["Poster"]
+            document.getElementById("p").src = data["Poster"]
+            document.getElementById("plot").innerHTML = data["Plot"]
+            document.getElementById("mt").innerHTML = data["Title"]
+            document.getElementById("tt").innerHTML = data["Title"]
+            document.getElementById("g").innerHTML = data["Genre"]
+            document.getElementById("rt").innerHTML = data["Runtime"]
+            document.getElementById("rate").innerHTML = data["imdbRating"]
+            document.getElementById("rtd").innerHTML = "Rated "+data["Rated"]
+            document.getElementById("y").innerHTML = "<hr> "+" Released "+data["Released"]+"  "+ " <hr>"
+            var actor = data["Actors"].split(",")
+            var writer = data["Writer"].split(",")
+            var director = data["Director"].split(",")
+            var awards = data["Awards"].split(",")
+            console.log(actor)
+            for (var i = 0; i < actor.length; i++){
+                var newactor = document.createElement("li")
+                newactor.innerHTML = actor[i]
+                newactor.id = "actorname" + i; 
+                document.getElementById("actorList").appendChild(newactor)
+            }
+            for (var i = 0; i < writer.length; i++){
+                var newwriter = document.createElement("li")
+                newwriter.innerHTML = writer[i]
+                newwriter.id = "writername" + i; 
+                document.getElementById("writerList").appendChild(newwriter)
+            }
+            for (var i = 0; i < director.length; i++){
+                var newdirector = document.createElement("li")
+                newdirector.innerHTML = director[i]
+                newdirector.id = "directorname" + i; 
+                document.getElementById("directorList").appendChild(newdirector)
+            }
+            for (var i = 0; i < awards.length; i++){
+                var newawards = document.createElement("li")
+                newawards.innerHTML = awards[i]
+                newawards.id = "awards" + i; 
+                document.getElementById("awardsList").appendChild(newawards)
+            }
+        })
+    </script>
+</body>
+</html>

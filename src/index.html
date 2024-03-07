@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Movie</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+      <div id="wrapper2">
+         <a id="watchlist" href="watchlist.html">Watchlist</a>
+      </div>
+    <div id="intro">
+         <div class="nav-bar">
+          <br><br><br><br>
+      <h1>MOVIE FINDING HERE ...</h1>
+      <div id="searcharea">
+        <div class="searchbar">
+          <input id="moviename" type="text" placeholder="Searching Your Movie"/>
+          <button id="search" onclick="search()">
+            <img class="searchicon" src="img/searchicon.png">
+          </button>
+        </div>
+      </div>
+    <div class="search-results" id="search-results"></div>
+  </body>
+  <script src="main.js"></script>
+  <script src="search.js" defer></script>
+</html>
